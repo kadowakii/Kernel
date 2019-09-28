@@ -1,0 +1,6 @@
+input/*
+!.gitkeep
+notebook/*
+!.gitkeep
+script/*
+!.gitkeep
