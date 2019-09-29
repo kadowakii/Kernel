@@ -2,7 +2,6 @@ version: "3"
 services:
   jupyter:
     build: .
-    container_name: kernel
     volumes:
       - $PWD:/tmp/working
     working_dir: /tmp/working
