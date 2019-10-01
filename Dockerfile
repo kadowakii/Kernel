@@ -24,4 +24,8 @@ RUN git clone --depth 1 https://github.com/neologd/mecab-ipadic-neologd.git\
     && bin/install-mecab-ipadic-neologd -n -y
 
 RUN pip install mecab-python3
-RUN pip install nodejs
+
+RUN curl -sL https://deb.nodesource.com/setup_11.x | bash - \
+    && apt-get install -y nodejs
+RUN jupyter labextension install @jupyter-widgets/jupyterlab-manager
+RUN jupyter labextension install jupyterlab_vim
