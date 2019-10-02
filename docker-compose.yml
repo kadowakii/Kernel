@@ -1,6 +1,6 @@
 version: "3"
 services:
-  kernel:
+  jupyterlab:
     build: .
     volumes:
       - $PWD:/content
