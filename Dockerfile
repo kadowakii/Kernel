@@ -11,21 +11,29 @@ RUN apt-get update \
     && apt-get install -y libmecab-dev \
     && apt-get install -y mecab-ipadic-utf8 \
     && apt-get install -y git \
-    && apt-get install -y make\ 
-    && apt-get install -y curl\
-    && apt-get install -y xz-utils\
-    && apt-get install -y file\
-    && apt-get install -y sudo\
-    && apt-get install -y wget\
-    && apt-get install -y build-essential
+    && apt-get install -y make \
+    && apt-get install -y curl \
+    && apt-get install -y xz-utils \
+    && apt-get install -y file \
+    && apt-get install -y sudo
 
-RUN git clone --depth 1 https://github.com/neologd/mecab-ipadic-neologd.git\
-    && cd mecab-ipadic-neologd\
+
+RUN git clone --depth 1 https://github.com/neologd/mecab-ipadic-neologd.git \
+    && cd mecab-ipadic-neologd \
     && bin/install-mecab-ipadic-neologd -n -y
 
 RUN pip install mecab-python3
 
-RUN curl -sL https://deb.nodesource.com/setup_11.x | bash - \
-    && apt-get install -y nodejs
-RUN jupyter labextension install @jupyter-widgets/jupyterlab-manager
-RUN jupyter labextension install jupyterlab_vim
+# nodejsの導入
+RUN curl -sL https://deb.nodesource.com/setup_12.x | sudo -E bash - \
+    && sudo apt-get install -y nodejs
+
+# 変数確認
+RUN jupyter labextension install @lckr/jupyterlab_variableinspector
+
+# 自動整形(autopep8)
+RUN pip install autopep8 \
+    && pip install jupyterlab_code_formatter \
+    && jupyter labextension install @ryantam626/jupyterlab_code_formatter \
+    && jupyter serverextension enable --py jupyterlab_code_formatter
+
